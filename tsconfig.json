@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "useDefineForClassFields": true,
+        "allowImportingTsExtensions": true,
+        "verbatimModuleSyntax": true,
+        "lib": ["ES2015", "DOM", "DOM.Iterable"],
+        "noEmit": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "baseUrl": "./src",
+        "paths": {
+            "@shared/*": ["lib/*"]
+        }
+    },
+    "include": ["src/**/*.ts", "src/**/*.d.ts"]
+}
