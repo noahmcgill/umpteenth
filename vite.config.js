@@ -19,13 +19,13 @@ export default defineConfig({
         outDir,
         sourcemap: false,
         lib: {
-            entry: `src/packages/index.ts`,
+            entry: `src/index.ts`,
             name: 'Umpteenth',
             formats: ['iife'],
             fileName: () => `bundle.${VERSION}.js`,
         },
         rollupOptions: {
-            input: `src/packages/index.ts`,
+            input: `src/index.ts`,
             output: {
                 manualChunks: undefined,
             },

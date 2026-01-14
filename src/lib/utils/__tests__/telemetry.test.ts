@@ -1,15 +1,21 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import * as sendModule from '../send';
 import { track } from '../telemetry';
+import { setConfig } from '../globals';
 
 describe('track()', () => {
     beforeEach(() => {
         vi.spyOn(sendModule, 'send').mockImplementation(() => {});
 
-        window.UmpteenthConfig = {
+        window.Umpteenth = {
+            setConfig,
+            track,
+        };
+
+        window.Umpteenth.setConfig({
             url: 'https://example.com',
             meta: { partnerId: 'acme' },
-        };
+        });
     });
 
     it('sends correct base payload', () => {

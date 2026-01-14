@@ -7,12 +7,13 @@ declare global {
 
     interface Window {
         UmpteenthEnv: UnknownObject;
-        UmpteenthConfig?: {
-            url?: string;
-            meta?: Record<string, unknown>;
-        };
         Umpteenth: {
+            setConfig: (config?: UnknownObject) => void;
             track: (type: string, data: UnknownObject) => void;
+            config?: {
+                url?: string;
+                meta?: Record<string, unknown>;
+            };
         };
     }
 }

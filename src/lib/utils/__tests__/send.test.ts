@@ -1,11 +1,18 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { send } from '../send';
+import { setConfig } from '../globals';
+import { track } from '../telemetry';
 
 describe('send()', () => {
     beforeEach(() => {
-        window.UmpteenthConfig = {
-            url: 'https://example.com',
+        window.Umpteenth = {
+            setConfig,
+            track,
         };
+
+        window.Umpteenth.setConfig({
+            url: 'https://example.com',
+        });
     });
 
     it('uses sendBeacon when available', () => {
@@ -27,7 +34,7 @@ describe('send()', () => {
     });
 
     it('does nothing when endpoint is missing', () => {
-        window.UmpteenthConfig = undefined;
+        window.Umpteenth.setConfig(undefined);
 
         expect(() => send({ test: true })).not.toThrow();
     });

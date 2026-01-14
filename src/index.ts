@@ -1,11 +1,16 @@
+/**
+ * Roadmap:
+ * * Scope error handling to specific context
+ */
+
+import { setConfig } from '@shared/utils/globals';
 import { track } from '@shared/utils/telemetry';
 
 (() => {
     window.Umpteenth = {
+        setConfig,
         track,
     };
-
-    track('load');
 
     window.addEventListener('error', (e) => {
         track('err', {
