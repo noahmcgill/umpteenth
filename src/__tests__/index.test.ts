@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import * as trackModule from '../lib/utils/telemetry';
+import * as trackModule from '../utils/telemetry';
 import '../index';
 
 describe('global error handlers', () => {

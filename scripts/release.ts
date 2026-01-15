@@ -79,7 +79,7 @@ execSync(`vite build`, {
     env: { ...process.env, VERSION: release },
 });
 
-const bundleFile = path.join(outDir, `bundle.${release}.js`);
+const bundleFile = path.join(outDir, `umpteenth.${release}.js`);
 if (!fs.existsSync(bundleFile)) {
     console.error('Bundle not found:', bundleFile);
     process.exit(1);
@@ -103,7 +103,7 @@ execSync(`git push && git push origin ${release}`, {
 // -------------------------
 /*
 const s3 = new S3Client({ region: region ?? 'us-east-1' });
-const key = `bundle.${release}.js`;
+const key = `umpteenth.${release}.js`;
 
 const fileStream = fs.createReadStream(bundleFile);
 const command = new PutObjectCommand({

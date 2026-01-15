@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite';
 import { fileURLToPath } from 'url';
+import { BUILD_VERSION } from './version';
 import path from 'path';
 import fs from 'fs';
-import { BUILD_VERSION } from './version';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,7 +23,7 @@ export default defineConfig({
             entry: `src/index.ts`,
             name: 'Umpteenth',
             formats: ['iife'],
-            fileName: () => `bundle.${VERSION}.js`,
+            fileName: () => `umpteenth.${VERSION}.js`,
         },
         rollupOptions: {
             input: `src/index.ts`,
@@ -31,14 +32,9 @@ export default defineConfig({
             },
         },
     },
-    resolve: {
-        alias: {
-            '@/': path.resolve(__dirname, './src'),
-            '@shared': path.resolve(__dirname, './src/lib'),
-        },
-    },
     test: {
         environment: 'jsdom',
         globals: true,
     },
+    plugins: [tsconfigPaths()],
 });

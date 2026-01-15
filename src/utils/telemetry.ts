@@ -1,4 +1,4 @@
-import type { EventData } from '@shared/types';
+import type { EventData } from '@/types';
 import { send } from './send';
 import { getConfig } from './globals';
 

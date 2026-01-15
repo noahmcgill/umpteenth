@@ -1,6 +1,6 @@
 # Umpteenth
 
-Umpteenth is a cookie-free, PII-sensitive, and ultra-lightweight JavaScript telemetry bundle (<= 1kb unzipped as of now).
+Umpteenth is a cookie-free, PII-sensitive, and ultra-lightweight JavaScript telemetry bundle (~ 1.4kb unzipped as of now).
 
 ## Setup
 
@@ -25,7 +25,7 @@ npm run dev
 Your script is now available at `localhost:3006`, e.g.:
 
 ```
-http://localhost:3006/v2/bundle.0.1.0.js
+http://localhost:3006/v2/umpteenth.0.1.0.js
 ```
 
 Note: Each time a source file is saved, Vite `--watch` mode will re-build on the fly. This isn't quite the same as HMR, but a close second — you'll need to refresh whatever page you're loading the script in.
@@ -49,7 +49,7 @@ Here's an example:
     })();
 
     var s = document.createElement('script');
-    s.src = 'https://cdn.mysite.com/bundle.0.1.0.js';
+    s.src = 'https://cdn.mysite.com/umpteenth.0.1.0.js';
     s.async = true;
     s.type = 'text/javascript';
 

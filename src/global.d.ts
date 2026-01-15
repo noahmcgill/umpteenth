@@ -1,4 +1,5 @@
-import type { UnknownObject } from '@shared/types';
+import type { UnknownObject } from 'types';
+import type { UmpteenthConfigOpts, UmpteenthConfig } from './types';
 
 declare global {
     interface Navigator {
@@ -8,12 +9,9 @@ declare global {
     interface Window {
         UmpteenthEnv: UnknownObject;
         Umpteenth: {
-            setConfig: (config?: UnknownObject) => void;
+            setConfig: (config?: UmpteenthConfigOpts) => void;
             track: (type: string, data: UnknownObject) => void;
-            config?: {
-                url?: string;
-                meta?: Record<string, unknown>;
-            };
+            config?: UmpteenthConfig;
         };
     }
 }

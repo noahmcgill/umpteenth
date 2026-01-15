@@ -1,5 +1,5 @@
 {
-    "name": "umpteenth",
+    "name": "@umpteenth/browser",
     "private": true,
     "version": "0.0.0",
     "type": "module",
@@ -40,11 +40,12 @@
         "jsdom": "^27.4.0",
         "lint-staged": "^16.2.3",
         "prettier": "^3.6.2",
-        "serv": "^0.2.4",
+        "serve": "^14.2.5",
         "tsx": "^4.20.6",
         "typescript": "~5.9.3",
         "typescript-eslint": "^8.46.0",
         "vite": "^7.1.7",
+        "vite-tsconfig-paths": "^6.0.4",
         "vitest": "^4.0.17",
         "wait-on": "^9.0.3"
     }
