@@ -18,7 +18,7 @@ function baseContext() {
     };
 }
 
-export function track(type: string, data: EventData = {}) {
+export function capture(type: string, data: EventData = {}) {
     send({
         t: type,
         ts: Date.now(),
@@ -28,7 +28,7 @@ export function track(type: string, data: EventData = {}) {
 }
 
 export function captureError(error: Error, data: EventData = {}) {
-    track('err', {
+    capture('err', {
         ...data,
         msg: error.message,
         n: error.name,

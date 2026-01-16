@@ -1,16 +1,16 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import * as sendModule from '../send';
-import { track, captureError } from '../telemetry';
+import { capture, captureError } from '../telemetry';
 import { init } from '../globals';
 
-describe('track()', () => {
+describe('capture()', () => {
     beforeEach(() => {
         vi.spyOn(sendModule, 'send').mockImplementation(() => {});
 
         window.Umpteenth = {
             captureError,
             init,
-            track,
+            capture,
         };
 
         window.Umpteenth.init({
@@ -22,7 +22,7 @@ describe('track()', () => {
     it('sends correct base payload', () => {
         const spy = vi.spyOn(sendModule, 'send').mockImplementation(() => {});
 
-        track('init_ok', { foo: 'bar' });
+        capture('init_ok', { foo: 'bar' });
 
         expect(spy).toHaveBeenCalledOnce();
 

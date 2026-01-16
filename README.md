@@ -48,7 +48,7 @@ Inside the callback, call Umpteenth.init() with a configuration object:
     // Configure umpteenthOnLoad before loading the script
     window.umpeenthOnLoad = function () {
         Umpteenth.init({
-            url: 'https://api.mysite.com/ping',
+            url: 'https://api.mysite.com/capture',
             meta: {
                 version: '0.1.0',
                 origin: window.location.origin,
@@ -56,11 +56,11 @@ Inside the callback, call Umpteenth.init() with a configuration object:
         });
 
         // Fire away!
-        Umpteenth.track('load');
+        Umpteenth.capture('load');
         Umpteenth.captureError(new Error('Test error'), {
             detail: 'This is a test error for Umpteenth.',
         });
-        Umpteenth.track('page_view', { page: '/test-page' });
+        Umpteenth.capture('page_view', { page: '/test-page' });
     };
 </script>
 <script src="http://localhost:3006/umpteenth.0.1.0.js"></script>
@@ -68,10 +68,10 @@ Inside the callback, call Umpteenth.init() with a configuration object:
 
 ### Send events
 
-You can explicitly send events using the `track` method:
+You can explicitly send events using the `capture` method:
 
 ```javascript
-window.Umpteenth.track('myEvent', {
+window.Umpteenth.capture('myEvent', {
     // ... event data
 });
 ```
@@ -79,7 +79,7 @@ window.Umpteenth.track('myEvent', {
 Event data is optional:
 
 ```javascript
-window.Umpteenth.track('load');
+window.Umpteenth.capture('load');
 ```
 
 The data will be merged with the environment and defined configuration metadata.

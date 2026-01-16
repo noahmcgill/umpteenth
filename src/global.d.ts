@@ -12,7 +12,7 @@ declare global {
         Umpteenth: {
             captureError: (error: Error, data?: UnknownObject) => void;
             init: (config?: UmpteenthConfig) => void;
-            track: (type: string, data: UnknownObject) => void;
+            capture: (type: string, data: UnknownObject) => void;
             config?: UmpteenthConfig;
         };
     }

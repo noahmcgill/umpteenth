@@ -4,7 +4,9 @@ import '../index';
 
 describe('global error handlers', () => {
     it('tracks window errors', () => {
-        const spy = vi.spyOn(trackModule, 'track').mockImplementation(() => {});
+        const spy = vi
+            .spyOn(trackModule, 'capture')
+            .mockImplementation(() => {});
 
         window.dispatchEvent(
             new ErrorEvent('error', {
@@ -22,7 +24,9 @@ describe('global error handlers', () => {
     });
 
     it('tracks unhandled rejections', () => {
-        const spy = vi.spyOn(trackModule, 'track').mockImplementation(() => {});
+        const spy = vi
+            .spyOn(trackModule, 'capture')
+            .mockImplementation(() => {});
 
         const err = new Error('nope');
         const promise = Promise.reject(err);

@@ -1,16 +1,16 @@
-import { captureError, init, track } from '@/utils';
+import { captureError, init, capture } from '@/utils';
 
 (() => {
     window.Umpteenth = {
         captureError,
         init,
-        track,
+        capture,
     };
 
     if (window.umpeenthOnLoad) window.umpeenthOnLoad();
 
     window.addEventListener('error', (e) => {
-        track('err', {
+        capture('err', {
             msg: e.message,
             src: e.filename,
             l: e.lineno,
@@ -24,7 +24,7 @@ import { captureError, init, track } from '@/utils';
                 ? e.reason.stack
                 : undefined;
 
-        track('rej', {
+        capture('rej', {
             msg: String(e.reason),
             stack,
         });
