@@ -4,5 +4,5 @@ import { BUILD_VERSION } from '../../version';
 
 it('telemetry bundle stays under 1.5kb', () => {
     const size = fs.statSync(`dist/umpteenth.${BUILD_VERSION}.js`).size;
-    expect(size).toBeLessThan(1.5 * 1024);
+    expect(size).toBeLessThanOrEqual(1 * 1024);
 });

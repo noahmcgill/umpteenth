@@ -1,11 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { send } from '../send';
 import { setConfig } from '../globals';
-import { track } from '../telemetry';
+import { captureError, track } from '../telemetry';
 
 describe('send()', () => {
     beforeEach(() => {
         window.Umpteenth = {
+            captureError,
             setConfig,
             track,
         };

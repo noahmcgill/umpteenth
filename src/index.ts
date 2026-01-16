@@ -1,19 +1,13 @@
-/**
- * Roadmap:
- * * Scope error handling to specific context
- */
-
-import { getConfig, setConfig, shouldCaptureError, track } from '@/utils';
+import { captureError, setConfig, track } from '@/utils';
 
 (() => {
     window.Umpteenth = {
+        captureError,
         setConfig,
         track,
     };
 
     window.addEventListener('error', (e) => {
-        if (!shouldCaptureError(e)) return;
-
         track('err', {
             msg: e.message,
             src: e.filename,
@@ -27,17 +21,6 @@ import { getConfig, setConfig, shouldCaptureError, track } from '@/utils';
             typeof e.reason === 'object' && e.reason?.stack
                 ? e.reason.stack
                 : undefined;
-
-        const { errorScope, scriptMatch } = getConfig();
-
-        if (
-            errorScope === 'stack' &&
-            stack &&
-            scriptMatch &&
-            !scriptMatch.test(stack)
-        ) {
-            return;
-        }
 
         track('rej', {
             msg: String(e.reason),

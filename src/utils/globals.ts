@@ -1,25 +1,11 @@
-import type { UmpteenthConfigOpts } from '@/types';
+import type { UmpteenthConfig } from '@/types';
 
 export function getConfig() {
     return window.Umpteenth.config ?? {};
 }
 
-export function setConfig(opts: UmpteenthConfigOpts = {}) {
-    const merged: UmpteenthConfigOpts = {
-        errorScope: 'script',
-        scriptMatch: /umpteenth(\.\d+)*\.js/,
-        ...opts,
-    };
-
-    const scriptMatch =
-        typeof merged.scriptMatch === 'string'
-            ? new RegExp(merged.scriptMatch)
-            : merged.scriptMatch;
-
-    window.Umpteenth.config = {
-        ...merged,
-        scriptMatch,
-    };
+export function setConfig(config: UmpteenthConfig = {}) {
+    window.Umpteenth.config = config;
 }
 
 export function getNavigator() {
