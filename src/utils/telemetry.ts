@@ -4,17 +4,17 @@ import { getConfig } from './globals';
 
 const env = {
     ua: navigator.userAgent,
-    platform: navigator.userAgentData?.platform || navigator.platform,
+    p: navigator.userAgentData?.platform || navigator.platform,
     w: screen.width,
     h: screen.height,
     ce: navigator.cookieEnabled,
     dnt: navigator.doNotTrack === '1',
 };
 
-function buildContext() {
+function baseContext() {
     return {
-        ...(getConfig()?.meta || {}),
-        ...env,
+        env,
+        meta: getConfig()?.meta || {},
     };
 }
 
@@ -22,7 +22,7 @@ export function track(type: string, data: EventData = {}) {
     send({
         t: type,
         ts: Date.now(),
-        c: buildContext(),
+        ...baseContext(),
         data,
     });
 }

@@ -4,7 +4,7 @@ export function getConfig() {
     return window.Umpteenth.config ?? {};
 }
 
-export function setConfig(config: UmpteenthConfig = {}) {
+export function init(config: UmpteenthConfig = {}) {
     window.Umpteenth.config = config;
 }
 

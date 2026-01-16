@@ -1,11 +1,13 @@
-import { captureError, setConfig, track } from '@/utils';
+import { captureError, init, track } from '@/utils';
 
 (() => {
     window.Umpteenth = {
         captureError,
-        setConfig,
+        init,
         track,
     };
+
+    if (window.umpeenthOnLoad) window.umpeenthOnLoad();
 
     window.addEventListener('error', (e) => {
         track('err', {

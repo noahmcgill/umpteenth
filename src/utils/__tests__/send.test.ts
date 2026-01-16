@@ -1,17 +1,17 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { send } from '../send';
-import { setConfig } from '../globals';
+import { init } from '../globals';
 import { captureError, track } from '../telemetry';
 
 describe('send()', () => {
     beforeEach(() => {
         window.Umpteenth = {
             captureError,
-            setConfig,
+            init,
             track,
         };
 
-        window.Umpteenth.setConfig({
+        window.Umpteenth.init({
             url: 'https://example.com',
         });
     });
@@ -35,7 +35,7 @@ describe('send()', () => {
     });
 
     it('does nothing when endpoint is missing', () => {
-        window.Umpteenth.setConfig(undefined);
+        window.Umpteenth.init(undefined);
 
         expect(() => send({ test: true })).not.toThrow();
     });

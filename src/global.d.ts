@@ -8,9 +8,10 @@ declare global {
 
     interface Window {
         UmpteenthEnv: UnknownObject;
+        umpeenthOnLoad?: () => void;
         Umpteenth: {
             captureError: (error: Error, data?: UnknownObject) => void;
-            setConfig: (config?: UmpteenthConfig) => void;
+            init: (config?: UmpteenthConfig) => void;
             track: (type: string, data: UnknownObject) => void;
             config?: UmpteenthConfig;
         };

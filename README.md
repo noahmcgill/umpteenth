@@ -1,6 +1,6 @@
 # Umpteenth
 
-Umpteenth is a cookie-free, PII-sensitive, and ultra-lightweight JavaScript telemetry bundle (~ 1.4kb unzipped as of now).
+Umpteenth is a cookie-free, PII-sensitive, and ultra-lightweight JavaScript telemetry bundle (~ 1.3kb unzipped as of now).
 
 ## Setup
 
@@ -25,41 +25,43 @@ npm run dev
 Your script is now available at `localhost:3006`, e.g.:
 
 ```
-http://localhost:3006/v2/umpteenth.0.1.0.js
+http://localhost:3006/umpteenth.0.1.0.js
 ```
 
 Note: Each time a source file is saved, Vite `--watch` mode will re-build on the fly. This isn't quite the same as HMR, but a close second — you'll need to refresh whatever page you're loading the script in.
 
 ## Usage
 
-The bundle must be consumed by an async loader script that defines a `window.UmpteenthConfig` object. This object should include a `url` property (required, represents the telemetry endpoint tracking data will be sent to) and a `meta` property (optional, a JavaScript object containing any additional information the browser should pass to the telemetry endpoint).
+Before loading the bundle, define a window.umpeenthOnLoad callback. The bundle will invoke this function once it has loaded, giving you a chance to initialize Umpteenth.
 
-Here's an example:
+Inside the callback, call Umpteenth.init() with a configuration object:
+
+- url (required) — The telemetry endpoint that events and errors will be sent to.
+- meta (optional) — An object containing additional metadata to include with every event.
+
+### Example
 
 ```html
-<script type="text/javascript" async>
-    (function () {
-        window.Umpteenth.setConfig({
-            url: 'https://api.mysite.com/track',
+<script>
+    // Configure umpteenthOnLoad before loading the script
+    window.umpeenthOnLoad = function () {
+        Umpteenth.init({
+            url: 'https://webhook.site/a5118ae5-ccce-47c2-888c-5ae8a6c18340',
             meta: {
                 version: '0.1.0',
                 origin: window.location.origin,
             },
         });
-    })();
 
-    var s = document.createElement('script');
-    s.src = 'https://cdn.mysite.com/umpteenth.0.1.0.js';
-    s.async = true;
-    s.type = 'text/javascript';
-
-    s.onload = function () {
-        // Do something on load
+        // Fire away!
+        Umpteenth.track('load');
+        Umpteenth.captureError(new Error('Test error'), {
+            detail: 'This is a test error for Umpteenth.',
+        });
+        Umpteenth.track('page_view', { page: '/test-page' });
     };
-
-    var entry = document.getElementsByTagName('script')[0];
-    entry.parentNode.insertBefore(s, entry);
 </script>
+<script src="http://localhost:3006/umpteenth.0.1.0.js"></script>
 ```
 
 ### Send events
@@ -115,7 +117,7 @@ This process can be done with the `scripts/release.ts` script. This script does 
 E.g. usage:
 
 ```bash
-npm run release -- --release 2.0.1 --bucket my-bucket
+npm run release -- --release 0.1.0 --bucket my-bucket
 ```
 
 To see list of script options, run:

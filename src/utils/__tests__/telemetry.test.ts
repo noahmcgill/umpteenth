@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import * as sendModule from '../send';
 import { track, captureError } from '../telemetry';
-import { setConfig } from '../globals';
+import { init } from '../globals';
 
 describe('track()', () => {
     beforeEach(() => {
@@ -9,11 +9,11 @@ describe('track()', () => {
 
         window.Umpteenth = {
             captureError,
-            setConfig,
+            init,
             track,
         };
 
-        window.Umpteenth.setConfig({
+        window.Umpteenth.init({
             url: 'https://example.com',
             meta: { partnerId: 'acme' },
         });
@@ -29,7 +29,7 @@ describe('track()', () => {
         const payload = spy.mock.calls[0][0] as {
             t: string;
             ts: number;
-            c: unknown;
+            env: unknown;
             meta: unknown;
             data: unknown;
         };
@@ -37,12 +37,12 @@ describe('track()', () => {
         expect(payload).toEqual(
             expect.objectContaining({
                 t: 'init_ok',
-                c: expect.objectContaining({ partnerId: 'acme' }),
+                meta: { partnerId: 'acme' },
                 data: { foo: 'bar' },
             })
         );
 
         expect(typeof payload.ts).toBe('number');
-        expect(payload.c).toBeDefined();
+        expect(payload.env).toBeDefined();
     });
 });
