@@ -14,6 +14,7 @@ describe('capture()', () => {
         };
 
         window.Umpteenth.init({
+            clientId: 'test-client-id',
             url: 'https://example.com',
             meta: { partnerId: 'acme' },
         });
@@ -29,6 +30,7 @@ describe('capture()', () => {
         const payload = spy.mock.calls[0][0] as {
             t: string;
             ts: number;
+            cid: string;
             env: unknown;
             meta: unknown;
             data: unknown;
@@ -37,6 +39,7 @@ describe('capture()', () => {
         expect(payload).toEqual(
             expect.objectContaining({
                 t: 'init_ok',
+                cid: 'test-client-id',
                 meta: { partnerId: 'acme' },
                 data: { foo: 'bar' },
             })

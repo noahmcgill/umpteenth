@@ -48,11 +48,12 @@ Inside the callback, call Umpteenth.init() with a configuration object:
     // Configure umpteenthOnLoad before loading the script
     window.umpeenthOnLoad = function () {
         Umpteenth.init({
-            url: 'https://api.mysite.com/capture',
+            clientId: 'my-client-id',
             meta: {
                 version: '0.1.0',
                 origin: window.location.origin,
             },
+            url: 'https://api.mysite.com/capture',
         });
 
         // Fire away!

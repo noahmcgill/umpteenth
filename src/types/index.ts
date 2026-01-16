@@ -1,7 +1,8 @@
 export type UnknownObject = Record<string | number | symbol, unknown>;
 export type UmpteenthConfig = {
-    url?: string;
+    clientId?: string;
     meta?: UnknownObject;
+    url?: string;
 };
 export type EventData = Record<string, unknown>;
 

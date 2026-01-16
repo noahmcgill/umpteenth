@@ -22,6 +22,7 @@ export function capture(type: string, data: EventData = {}) {
     send({
         t: type,
         ts: Date.now(),
+        cid: getConfig()?.clientId,
         ...baseContext(),
         data,
     });
