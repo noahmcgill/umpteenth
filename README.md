@@ -1,6 +1,6 @@
 # Umpteenth
 
-Umpteenth is a cookie-free, PII-sensitive, and ultra-lightweight JavaScript telemetry bundle (~ 1.3kb unzipped as of now).
+Umpteenth is a cookie-free, PII-sensitive, and ultra-lightweight JavaScript telemetry bundle (~ 1.04kb unzipped).
 
 ## Setup
 
@@ -30,7 +30,7 @@ http://localhost:3006/umpteenth.0.1.0.js
 
 Note: Each time a source file is saved, Vite `--watch` mode will re-build on the fly. This isn't quite the same as HMR, but a close second — you'll need to refresh whatever page you're loading the script in.
 
-If you run `npm run dev`, a minimal HTML sandbox page is served at `localhost:3000` that loads the script.
+If you run `npm run dev`, a minimal HTML sandbox page is served at localhost:3000 that loads the script.
 
 ## Usage
 
@@ -76,13 +76,21 @@ window.Umpteenth.track('myEvent', {
 });
 ```
 
-You can also send events with no additional data:
+Event data is optional:
 
 ```javascript
 window.Umpteenth.track('load');
 ```
 
 The data will be merged with the environment and defined configuration metadata.
+
+You can also easily send error information using the `captureError` function:
+
+```javascript
+Umpteenth.captureError(new Error('Test error'), {
+    detail: 'This is additional context!',
+});
+```
 
 ## Build
 
