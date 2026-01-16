@@ -16,10 +16,10 @@ npm run lint # or npm run lint:fix to attempt automatic fixing
 
 ## Run in Development
 
-Run the following:
+Run the following commands:
 
-```
-npm run dev
+```bash
+npm run dev:headless
 ```
 
 Your script is now available at `localhost:3006`, e.g.:
@@ -29,6 +29,8 @@ http://localhost:3006/umpteenth.0.1.0.js
 ```
 
 Note: Each time a source file is saved, Vite `--watch` mode will re-build on the fly. This isn't quite the same as HMR, but a close second — you'll need to refresh whatever page you're loading the script in.
+
+If you run `npm run dev`, a minimal HTML sandbox page is served at `localhost:3000` that loads the script.
 
 ## Usage
 
@@ -46,7 +48,7 @@ Inside the callback, call Umpteenth.init() with a configuration object:
     // Configure umpteenthOnLoad before loading the script
     window.umpeenthOnLoad = function () {
         Umpteenth.init({
-            url: 'https://webhook.site/a5118ae5-ccce-47c2-888c-5ae8a6c18340',
+            url: 'https://api.mysite.com/ping',
             meta: {
                 version: '0.1.0',
                 origin: window.location.origin,

@@ -14,7 +14,7 @@
         "build": "tsc && vite build",
         "generate:sourcemap": "npx @sentry/wizard@latest -i sourcemaps",
         "bundle:analyze": "npx vite-bundle-visualizer",
-        "dev": "concurrently -k \"vite build --watch\" \"npx serve dist -l 3006\" \"npx serve tests/server -l 3000\"",
+        "dev": "concurrently -k \"vite build --watch\" \"npx serve dist -l 3006\" \"npx serve tests/sandbox -l 3000\"",
         "dev:headless": "concurrently -k \"vite build --watch\" \"npx serve dist -l 3006\"",
         "build:watch": "vite build --watch",
         "release": "npx tsx scripts/release.ts",
