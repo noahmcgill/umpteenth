@@ -1,21 +1,15 @@
-import { getConfig } from './globals';
-
-export function send(event: unknown) {
-    const endpoint = getConfig()?.url;
-    if (!endpoint) return;
-
+export function send(url: string, event: unknown) {
     try {
         const payload = JSON.stringify(event);
+        const sent = navigator.sendBeacon(url, payload);
 
-        if (navigator.sendBeacon) {
-            navigator.sendBeacon(endpoint, payload);
-        } else {
-            fetch(endpoint, {
+        if (!sent) {
+            fetch(url, {
                 method: 'POST',
                 body: payload,
                 keepalive: true,
                 headers: { 'Content-Type': 'application/json' },
-            });
+            }).catch(() => {});
         }
     } catch {
         /* noop */

@@ -3,27 +3,23 @@ import { send } from './send';
 import { getConfig } from './globals';
 
 const env = {
+    p: window.location.href,
     ua: navigator.userAgent,
-    p: navigator.userAgentData?.platform || navigator.platform,
     w: screen.width,
     h: screen.height,
     ce: navigator.cookieEnabled,
     dnt: navigator.doNotTrack === '1',
 };
 
-function baseContext() {
-    return {
-        env,
-        meta: getConfig()?.meta || {},
-    };
-}
-
 export function capture(type: string, data: EventData = {}) {
-    send({
+    const c = getConfig();
+
+    send(c.url ?? '', {
         t: type,
         ts: Date.now(),
-        cid: getConfig()?.clientId,
-        ...baseContext(),
+        cid: c?.clientId,
+        env,
+        meta: c?.meta || {},
         data,
     });
 }

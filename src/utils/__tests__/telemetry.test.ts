@@ -27,7 +27,7 @@ describe('capture()', () => {
 
         expect(spy).toHaveBeenCalledOnce();
 
-        const payload = spy.mock.calls[0][0] as {
+        const payload = spy.mock.calls[0][1] as {
             t: string;
             ts: number;
             cid: string;

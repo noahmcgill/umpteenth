@@ -1,6 +1,6 @@
 # Umpteenth
 
-Umpteenth is a cookie-free, PII-sensitive, and ultra-lightweight JavaScript telemetry bundle (~ 1.04kb unzipped).
+Umpteenth is a cookie-free, PII-sensitive, and ultra-lightweight JavaScript telemetry bundle (~ 0.99kb unzipped).
 
 ## Setup
 
@@ -50,8 +50,7 @@ Inside the callback, call Umpteenth.init() with a configuration object:
         Umpteenth.init({
             clientId: 'my-client-id',
             meta: {
-                version: '0.1.0',
-                origin: window.location.origin,
+                version: '0.1.0'
             },
             url: 'https://api.mysite.com/capture',
         });

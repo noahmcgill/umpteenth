@@ -1,42 +1,28 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { send } from '../send';
-import { init } from '../globals';
-import { captureError, capture } from '../telemetry';
 
 describe('send()', () => {
     beforeEach(() => {
-        window.Umpteenth = {
-            captureError,
-            init,
-            capture,
-        };
-
-        window.Umpteenth.init({
-            url: 'https://example.com',
-        });
+        globalThis.fetch = vi.fn();
     });
 
-    it('uses sendBeacon when available', () => {
-        const beacon = vi.fn();
+    it('does not call fetch when sendBeacon returns true', () => {
+        const beacon = vi.fn(() => true);
         navigator.sendBeacon = beacon as never;
 
-        send({ test: true });
+        send('https://example.com', { test: true });
 
         expect(beacon).toHaveBeenCalledOnce();
+        expect(fetch).not.toHaveBeenCalled();
     });
 
-    it('falls back to fetch when sendBeacon is missing', () => {
-        navigator.sendBeacon = undefined as never;
-        globalThis.fetch = vi.fn();
+    it('falls back to fetch when sendBeacon returns false', () => {
+        const beacon = vi.fn(() => false);
+        navigator.sendBeacon = beacon as never;
 
-        send({ test: true });
+        send('https://example.com', { test: true });
 
+        expect(beacon).toHaveBeenCalledOnce();
         expect(fetch).toHaveBeenCalledOnce();
-    });
-
-    it('does nothing when endpoint is missing', () => {
-        window.Umpteenth.init(undefined);
-
-        expect(() => send({ test: true })).not.toThrow();
     });
 });
